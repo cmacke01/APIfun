@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<title>Cat Facts API</title>
+	<meta charset="utf-8"/>
+	<script>
+		function getCatFacts() {
+
+			request = new XMLHttpRequest();
+
+		 request.open("GET", "https://cat-fact.herokuapp.com/facts", true)
+
+			 request.onreadystatechange = function() {
+				if (request.readyState == 4 && request.status == 200) {
+
+					result = request.responseText;
+					document.getElementById("facts").innerHTML = result;
+					fact = JSON.parse(result);
+
+					document.getElementById("facts").innerHTML = "cat fact!!!   &nbsp;" + fact[2]["text"]
+            + " <br>" + "cat fact2!!!! &nbsp;" + fact[1]["text"];
+
+				}
+
+			}
+			request.send();
+		 }
+	</script>
+</head>
+
+
+<body onload="getCatFacts()">
+
+  <h1> Get Ready for Some CAT FACTS</h1>
+	<div id="facts"> &nbsp; </div>
+
+  <div>
+      <br><br>
+    <ul>
+      <li>
+        I selected this API because I love cats and I miss my cat very much <br>
+      </li>
+      <li>
+        I found the API through https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/,
+         and the API data can be found here https://cat-fact.herokuapp.com/facts <br>
+      </li>
+      <li>
+        I used new XMLHttpRequest() to access this data, which allowed me to use open()
+        to request the data from the server (it returns a JSON string).
+        I used the onreadystatechange event handler to display the data when the data was ready.
+        I parsed the JSON string back into an object and accessed the "text"
+        field of two of the facts, which were in an array.
+      </li>
+      <li>
+        This API updates daily, so it could be used on a veterenarian's website to generate the
+        "cat fact of the day."  It could also be used on a pet adoption agency's elist, and it
+        could email a cat fact of the day to their clients.
+      </li>
+    </ul>
+</body>
+</html>
